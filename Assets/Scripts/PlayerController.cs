@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
 	private float _speed;
 	private Vector2 _axisVector = Vector2.zero;
 	private Vector3 _currentVelocity = Vector3.zero;
+    private bool _canInteractUI = false;
 
 	Rigidbody2D _rb2D;
 	Animator _currentAnimator;
@@ -29,53 +30,90 @@ public class PlayerController : MonoBehaviour
 	}
 
 	void Update()
-	{
-		// get speed from the rigid body to be used for animator parameter Speed
-		_speed = _rb2D.velocity.magnitude;
+    {
+        CalCulateMovement();
+        SetAnimations();
+    }
 
-		// Get input axises
-		_axisVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+    void FixedUpdate()
+    {
+        // Move our character
+        Move();
+    }
 
-		//normalize it for good topdown diagonal movement
-		if (_normalizedMovement == true)
-		{
-			_axisVector.Normalize();
-		}
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if(other.CompareTag("Shop Keeper"))
+        {
+            var keeper = other.GetComponent<ShopKeeper>();
+            _canInteractUI = true;
+            keeper.ActivateButton(true);
 
-		// Set speed parameter to the animator
-		_currentAnimator.SetFloat("Speed", _speed);
+            if (_canInteractUI)
+            {
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    keeper.ButtonPressed(true);
+                    UIManager.Instance.ActivateShopPanel(true);
+                }
+            }
+        }
+    }
 
-		// Check keys for actions and use appropiate function
-		//
-		if (Input.GetKey(KeyCode.Space))  // SWING ATTACK
-		{
-			PlayAnimation("Swing");
-		}
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Shop Keeper"))
+        {
+            var keeper = other.GetComponent<ShopKeeper>();
+            _canInteractUI = false;
+            keeper.ActivateButton(false);
+            keeper.ButtonPressed(false);
+        }
+    }
 
-		else if (Input.GetKey(KeyCode.C))  // THRUST ATTACK
-		{
-			PlayAnimation("Thrust");
-		}
+    private void CalCulateMovement()
+    {
+        // get speed from the rigid body to be used for animator parameter Speed
+        _speed = _rb2D.velocity.magnitude;
 
-		else if (Input.GetKey(KeyCode.X))  // BOW ATTACK
-		{
-			PlayAnimation("Bow");
-		}
+        // Get input axises
+        _axisVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-	}
+        //normalize it for good topdown diagonal movement
+        if (_normalizedMovement == true)
+        {
+            _axisVector.Normalize();
+        }
+    }
 
-	void FixedUpdate()
-	{
-		// Move our character
-		Move();
-	}
+    private void SetAnimations()
+    {
+        // Set speed parameter to the animator
+        _currentAnimator.SetFloat("Speed", _speed);
+
+        // Check keys for actions and use appropiate function
+        //
+        if (Input.GetKey(KeyCode.Space))  // SWING ATTACK
+        {
+            PlayAnimation("Swing");
+        }
+
+        else if (Input.GetKey(KeyCode.C))  // THRUST ATTACK
+        {
+            PlayAnimation("Thrust");
+        }
+
+        else if (Input.GetKey(KeyCode.X))  // BOW ATTACK
+        {
+            PlayAnimation("Bow");
+        }
+    }
 
 	void PlayAnimation(string animationName)
 	{
 		// Play given animation in the current directions animator
 		_currentAnimator.Play(animationName, 0);
 	}
-
 
 	void Move()
 	{
@@ -85,4 +123,9 @@ public class PlayerController : MonoBehaviour
 		// Smoothing out the movement
 		_rb2D.velocity = Vector3.SmoothDamp(_rb2D.velocity, targetVelocity, ref _currentVelocity, _movementSmoothing);
 	}
+
+    public bool SetUIInteraction(bool interact)
+    {
+        return _canInteractUI = interact;
+    }
 }

@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Shop Keeper
   layers:
   - Default
   - TransparentFX
@@ -46,6 +47,9 @@ TagManager:
     locked: 0
   - name: Wall
     uniqueID: 2457638399
+    locked: 0
+  - name: NPC
+    uniqueID: 1265924061
     locked: 0
   - name: Player
     uniqueID: 3109915661

@@ -31,4 +31,9 @@ public class UIManager : MonoBehaviour
     {
         _coins.text = $"Coins: {amount}";
     }
+
+    public void ActivateShopPanel(bool activate)
+    {
+        _shopPanel.SetActive(activate);
+    }
 }
