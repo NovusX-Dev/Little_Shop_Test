@@ -6,6 +6,9 @@ using TMPro;
 
 public class Shop : MonoBehaviour
 {
+    public delegate void ActionClick();
+    public static event ActionClick OnCloseBuyShop;
+
     [Header("List of items in the shop")]
     [SerializeField] ShopItemSO[] shopItem;
     
@@ -45,19 +48,20 @@ public class Shop : MonoBehaviour
 
                 //Change prefab components based on current item
 
-                // 0 Name
-                itemObejct.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = currentItem.itemName;
-                // 1 Image
+                // 1 Name
+                itemObejct.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = currentItem.itemName;
+                // 2 Price
+                itemObejct.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = $"{currentItem.itemPrice} Coins";
+                // 3 Image
                 if (currentItem.centerSprite != null)
                 {
-                    itemObejct.transform.GetChild(1).GetComponent<Image>().sprite = currentItem.centerSprite;
+                    itemObejct.transform.GetChild(3).GetComponent<Image>().sprite = currentItem.centerSprite;
                 }
                 else if (currentItem.leftSprite != null)
                 {
-                   itemObejct.transform.GetChild(1).GetComponent<Image>().sprite = currentItem.leftSprite;
+                   itemObejct.transform.GetChild(3).GetComponent<Image>().sprite = currentItem.leftSprite;
                 }
-                // 2 Price
-                itemObejct.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = $"{currentItem.itemPrice} Coins";
+               
 
                 //Add listner to the button
                 itemObejct.GetComponent<Button>().onClick.AddListener(() => OnButtonClick(currentItem));
@@ -78,5 +82,12 @@ public class Shop : MonoBehaviour
         {
             Debug.Log("Not enough coins.");
         }
+    }
+
+    public void CloseShop()
+    {
+        gameObject.SetActive(false);
+
+        OnCloseBuyShop?.Invoke();
     }
 }

@@ -16,10 +16,12 @@ public class PlayerController : MonoBehaviour
 	private Vector2 _axisVector = Vector2.zero;
 	private Vector3 _currentVelocity = Vector3.zero;
     private bool _canInteractUI = false;
+    private bool _canMove = true;
 
 	Rigidbody2D _rb2D;
 	Animator _currentAnimator;
 	Animator downAnimator;
+    ShopKeeper _currentShopKeeper = null;
 
 	void Start()
 	{
@@ -31,8 +33,20 @@ public class PlayerController : MonoBehaviour
 
 	void Update()
     {
-        CalCulateMovement();
-        SetAnimations();
+        if(_canMove)
+        {
+            CalCulateMovement();
+            SetAnimations();
+        }
+
+        if (_canInteractUI)
+        {
+            if (Input.GetKeyDown(KeyCode.E) && _currentShopKeeper != null)
+            {
+                UIManager.Instance.ActivateDialogPanel(true);
+                _canMove = false;
+            }
+        }
     }
 
     void FixedUpdate()
@@ -48,15 +62,8 @@ public class PlayerController : MonoBehaviour
             var keeper = other.GetComponent<ShopKeeper>();
             _canInteractUI = true;
             keeper.ActivateButton(true);
-
-            if (_canInteractUI)
-            {
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    keeper.ButtonPressed(true);
-                    UIManager.Instance.ActivateShopPanel(true);
-                }
-            }
+            _currentShopKeeper = keeper;
+            Shop.OnCloseBuyShop += AllowPlayerMovement;
         }
     }
 
@@ -68,6 +75,8 @@ public class PlayerController : MonoBehaviour
             _canInteractUI = false;
             keeper.ActivateButton(false);
             keeper.ButtonPressed(false);
+            _currentShopKeeper = null;
+            Shop.OnCloseBuyShop -= AllowPlayerMovement;
         }
     }
 
@@ -117,8 +126,10 @@ public class PlayerController : MonoBehaviour
 
 	void Move()
 	{
-		// Set target velocity to smooth towards
-		Vector2 targetVelocity = new Vector2(_axisVector.x * _moveSpeed * 10f, _axisVector.y * _moveSpeed * 10) * Time.fixedDeltaTime;
+        if (!_canMove) return;
+
+        // Set target velocity to smooth towards
+        Vector2 targetVelocity = new Vector2(_axisVector.x * _moveSpeed * 10f, _axisVector.y * _moveSpeed * 10) * Time.fixedDeltaTime;
 
 		// Smoothing out the movement
 		_rb2D.velocity = Vector3.SmoothDamp(_rb2D.velocity, targetVelocity, ref _currentVelocity, _movementSmoothing);
@@ -127,5 +138,10 @@ public class PlayerController : MonoBehaviour
     public bool SetUIInteraction(bool interact)
     {
         return _canInteractUI = interact;
+    }
+
+    private void AllowPlayerMovement()
+    {
+        _canMove = true;
     }
 }

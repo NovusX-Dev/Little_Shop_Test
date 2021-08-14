@@ -19,7 +19,8 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    [SerializeField] GameObject _shopPanel;
+    [SerializeField] GameObject _dialogePanel;
+    [SerializeField] GameObject _buyPanel, _sellPanel;
     [SerializeField] TextMeshProUGUI _coins;
 
     void Awake()
@@ -32,8 +33,9 @@ public class UIManager : MonoBehaviour
         _coins.text = $"Coins: {amount}";
     }
 
-    public void ActivateShopPanel(bool activate)
+    public void ActivateDialogPanel(bool activate)
     {
-        _shopPanel.SetActive(activate);
+        _dialogePanel.SetActive(activate);
     }
+
 }
