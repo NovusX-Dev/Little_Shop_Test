@@ -1,18 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private static UIManager _instance;
+    public static UIManager Instance
     {
-        
+        get
+        {
+            if (_instance == null)
+            {
+                Debug.LogError("UI Manager is NULL!!");
+            }
+            return _instance;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    [SerializeField] GameObject _shopPanel;
+    [SerializeField] TextMeshProUGUI _coins;
+
+    void Awake()
     {
-        
+        _instance = this;
+    }
+
+    public void UpdateCoinsUI(int amount)
+    {
+        _coins.text = $"Coins: {amount}";
     }
 }
