@@ -7,28 +7,27 @@ using UnityEngine;
 public class SimpleCharacterController : MonoBehaviour
 {
 
-	public float moveSpeed = 70;
-	public float m_MovementSmoothing = 0.1f;
-	public bool normalizedMovement = true;
-	public GameObject upObject;
-	public GameObject leftObject;
-	public GameObject rightObject;
-	public GameObject downObject;
+	[SerializeField] float _moveSpeed = 70;
+	[SerializeField] float _movementSmoothing = 0.1f;
+	[SerializeField] bool _normalizedMovement = true;
+	[SerializeField] GameObject _upObject;
+	[SerializeField] GameObject _leftObject;
+	[SerializeField] GameObject _rightObject;
+	[SerializeField] GameObject _downObject;
 
-	Rigidbody2D rb;
-	Animator currentAnimator;
 
 	enum Direction { Up, Right, Down, Left };
 	enum Expression { Neutral, Angry, Smile, Surprised };
 
-	Direction currentDirection;
-	Direction previousDirection;
-	float angle = 180;
-	float speed;
+	private Direction _currentDirection;
+	private Direction _previousDirection;
+	private float _angle = 180;
+	private float _speed;
+	private Vector2 _axisVector = Vector2.zero;
+	private Vector3 _currentVelocity = Vector3.zero;
 
-	Vector2 axisVector = Vector2.zero;
-	Vector3 currentVelocity = Vector3.zero;
-
+	Rigidbody2D _rb2D;
+	Animator _currentAnimator;
 	Animator downAnimator;
 	Animator upAnimator;
 	Animator rightAnimator;
@@ -36,123 +35,123 @@ public class SimpleCharacterController : MonoBehaviour
 
 	void Start()
 	{
-		rb = GetComponent<Rigidbody2D>();
-		upObject.SetActive(false);
-		leftObject.SetActive(false);
-		rightObject.SetActive(false);
-		downObject.SetActive(true);
+		_rb2D = GetComponent<Rigidbody2D>();
 
-		downAnimator = downObject.GetComponent<Animator>();
-		upAnimator = upObject.GetComponent<Animator>();
-		rightAnimator = rightObject.GetComponent<Animator>();
-		leftAnimator = leftObject.GetComponent<Animator>();
-		currentAnimator = downAnimator;
+		_upObject.SetActive(false);
+		_leftObject.SetActive(false);
+		_rightObject.SetActive(false);
+		_downObject.SetActive(true);
+
+		downAnimator = _downObject.GetComponent<Animator>();
+		upAnimator = _upObject.GetComponent<Animator>();
+		rightAnimator = _rightObject.GetComponent<Animator>();
+		leftAnimator = _leftObject.GetComponent<Animator>();
+
+		_currentAnimator = downAnimator;
 	}
 
 	void Update()
 	{
 
 		// get speed from the rigid body to be used for animator parameter Speed
-		speed = rb.velocity.magnitude;
+		_speed = _rb2D.velocity.magnitude;
 
 		// Get input axises
-		axisVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+		_axisVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
 		//normalize it for good topdown diagonal movement
-		if (normalizedMovement == true)
+		if (_normalizedMovement == true)
 		{
-			axisVector.Normalize();
+			_axisVector.Normalize();
 		}
 
 		// Find out which direction to face and do what is appropiate
-		//
 
 		// Only update angle of direction if input axises are pressed
-		if (!(axisVector.x == 0 && axisVector.y == 0))
+		if (!(_axisVector.x == 0 && _axisVector.y == 0))
 		{
 			// Find out what direction angle based on input axises
-			angle = Mathf.Atan2(axisVector.x, axisVector.y) * Mathf.Rad2Deg;
+			_angle = Mathf.Atan2(_axisVector.x, _axisVector.y) * Mathf.Rad2Deg;
 
 			// Round out to prevent jittery direction changes.
-			angle = Mathf.RoundToInt(angle);
+			_angle = Mathf.RoundToInt(_angle);
 		}
 
 
-		if (angle > -45 && angle < 45)  // UP
+		if (_angle > -45 && _angle < 45)  // UP
 		{
-			currentDirection = Direction.Up;
+			_currentDirection = Direction.Up;
 		}
 
-		else if (angle < -135 || angle > 135) // DOWN
+		else if (_angle < -135 || _angle > 135) // DOWN
 		{
-			currentDirection = Direction.Down;
+			_currentDirection = Direction.Down;
 		}
 
-		else if (angle >= 45 && angle <= 135) // RIGHT
+		else if (_angle >= 45 && _angle <= 135) // RIGHT
 		{
-			currentDirection = Direction.Right;
+			_currentDirection = Direction.Right;
 		}
 
-		else if (angle <= -45 && angle >= -135)  // LEFT
+		else if (_angle <= -45 && _angle >= -135)  // LEFT
 		{
-			currentDirection = Direction.Left;
+			_currentDirection = Direction.Left;
 		}
 
 		// Did direction change?
-		if (previousDirection != currentDirection)
-		{
+		if (_previousDirection != _currentDirection)
+        {
 
-			if (currentDirection == Direction.Up)
-			{
-				// Activate appropiate game object
-				upObject.SetActive(true);
-				rightObject.SetActive(false);
-				leftObject.SetActive(false);
-				downObject.SetActive(false);
+            switch (_currentDirection)
+            {
+					case Direction.Up:
+					// Activate appropiate game object
+					_upObject.SetActive(true);
+					_rightObject.SetActive(false);
+					_leftObject.SetActive(false);
+					_downObject.SetActive(false);
 
-				currentAnimator = upAnimator;
-			}
+					_currentAnimator = upAnimator;
+					break;
 
-			else if (currentDirection == Direction.Down)
-			{
-				// Activate appropiate game object
-				upObject.SetActive(false);
-				rightObject.SetActive(false);
-				leftObject.SetActive(false);
-				downObject.SetActive(true);
+					case Direction.Down:
+					// Activate appropiate game object
+					_upObject.SetActive(false);
+					_rightObject.SetActive(false);
+					_leftObject.SetActive(false);
+					_downObject.SetActive(true);
 
-				currentAnimator = downAnimator;
-			}
+					_currentAnimator = downAnimator;
+					break;
 
-			else if (currentDirection == Direction.Right)
-			{
-				// Activate appropiate game object
-				upObject.SetActive(false);
-				rightObject.SetActive(true);
-				leftObject.SetActive(false);
-				downObject.SetActive(false);
+					case Direction.Left:
+					// Activate appropiate game object
+					_upObject.SetActive(false);
+					_rightObject.SetActive(false);
+					_leftObject.SetActive(true);
+					_downObject.SetActive(false);
 
-				currentAnimator = rightAnimator;
-			}
+					_currentAnimator = leftAnimator;
+					break;
 
-			else if (currentDirection == Direction.Left)
-			{
-				// Activate appropiate game object
-				upObject.SetActive(false);
-				rightObject.SetActive(false);
-				leftObject.SetActive(true);
-				downObject.SetActive(false);
+					case Direction.Right:
+					// Activate appropiate game object
+					_upObject.SetActive(false);
+					_rightObject.SetActive(true);
+					_leftObject.SetActive(false);
+					_downObject.SetActive(false);
 
-				currentAnimator = leftAnimator;
+					_currentAnimator = rightAnimator;
+					break;
 			}
 
 		}
 
 		// Set speed parameter to the animator
-		currentAnimator.SetFloat("Speed", speed);
+		_currentAnimator.SetFloat("Speed", _speed);
 
 		// Set current direction as previous
-		previousDirection = currentDirection;
+		_previousDirection = _currentDirection;
 
 
 		// Check keys for actions and use appropiate function
@@ -192,7 +191,7 @@ public class SimpleCharacterController : MonoBehaviour
 	void PlayAnimation(string animationName)
 	{
 		// Play given animation in the current directions animator
-		currentAnimator.Play(animationName, 0);
+		_currentAnimator.Play(animationName, 0);
 	}
 
 	void SetExpression(Expression expressionToSet)
@@ -201,9 +200,9 @@ public class SimpleCharacterController : MonoBehaviour
 		int expressionNumber = (int)expressionToSet;
 
 		// If the current direction is not up change expression (Up direction doesn't show any expressions)
-		if (!(currentDirection == Direction.Up)) // UP
+		if (!(_currentDirection == Direction.Up)) // UP
 		{
-			currentAnimator.SetInteger("Expression", expressionNumber);
+			_currentAnimator.SetInteger("Expression", expressionNumber);
 		}
 
 	}
@@ -211,9 +210,9 @@ public class SimpleCharacterController : MonoBehaviour
 	void Move()
 	{
 		// Set target velocity to smooth towards
-		Vector2 targetVelocity = new Vector2(axisVector.x * moveSpeed * 10f, axisVector.y * moveSpeed * 10) * Time.fixedDeltaTime;
+		Vector2 targetVelocity = new Vector2(_axisVector.x * _moveSpeed * 10f, _axisVector.y * _moveSpeed * 10) * Time.fixedDeltaTime;
 
 		// Smoothing out the movement
-		rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref currentVelocity, m_MovementSmoothing);
+		_rb2D.velocity = Vector3.SmoothDamp(_rb2D.velocity, targetVelocity, ref _currentVelocity, _movementSmoothing);
 	}
 }
