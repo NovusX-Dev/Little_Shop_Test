@@ -11,7 +11,7 @@ public class ShopItemSO : ScriptableObject
     public Type itemType;
 
     public string itemName;
-    public string itemPrice;
+    public int itemPrice;
     public Sprite centerSprite;
     public Sprite leftSprite;
     public Sprite rightSprite;

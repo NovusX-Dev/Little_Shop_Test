@@ -63,4 +63,9 @@ public class CoinManager : MonoBehaviour
         }
         UIManager.Instance.UpdateCoinsUI(_coins);
     }
+
+    public int GetCoinAmount()
+    {
+        return _coins;
+    }
 }

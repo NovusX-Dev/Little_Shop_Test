@@ -44,25 +44,39 @@ public class Shop : MonoBehaviour
                 newtItemsList.Add(itemObejct);
 
                 //Change prefab components based on current item
+
                 // 0 Name
-                // 1 Image
-                // 2 Price
-
                 itemObejct.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = currentItem.itemName;
+                // 1 Image
+                if (currentItem.centerSprite != null)
+                {
+                    itemObejct.transform.GetChild(1).GetComponent<Image>().sprite = currentItem.centerSprite;
+                }
+                else if (currentItem.leftSprite != null)
+                {
+                   itemObejct.transform.GetChild(1).GetComponent<Image>().sprite = currentItem.leftSprite;
+                }
+                // 2 Price
+                itemObejct.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = $"{currentItem.itemPrice} Coins";
 
-            if (currentItem.centerSprite != null)
-            {
-                itemObejct.transform.GetChild(1).GetComponent<Image>().sprite = currentItem.centerSprite;
-            }
-            else if (currentItem.leftSprite != null)
-            {
-                itemObejct.transform.GetChild(1).GetComponent<Image>().sprite = currentItem.leftSprite;
-            }
-
-            itemObejct.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = $"{currentItem.itemPrice} Coins";
+                //Add listner to the button
+                itemObejct.GetComponent<Button>().onClick.AddListener(() => OnButtonClick(currentItem));
             }
         }
 
         _currentItemsList = newtItemsList;
+    }
+
+    private void OnButtonClick(ShopItemSO item)
+    {
+        if (CoinManager.Instance.GetCoinAmount() >= item.itemPrice)
+        {
+            CoinManager.Instance.DeductCoins(item.itemPrice);
+            Debug.Log("Item Bought: " + item.itemName);
+        }
+        else
+        {
+            Debug.Log("Not enough coins.");
+        }
     }
 }
