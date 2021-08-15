@@ -7,7 +7,7 @@ using TMPro;
 [CreateAssetMenu(menuName = "Shop/Shop Item")]
 public class ShopItemSO : ScriptableObject
 {
-    public enum Type { HeadWear, ChestWear, LowerChest, FootWear, Belts }
+    public enum Type { HeadWear, ChestWear, LowerChest, FootWear, Belts}
     public Type itemType;
 
     public string itemName;
