@@ -421,7 +421,7 @@ GameObject:
   - component: {fileID: 134363301}
   - component: {fileID: 134363300}
   m_Layer: 5
-  m_Name: Not_Enough_Coins_Text
+  m_Name: Bought_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -453,7 +453,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 134363298}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
@@ -1104,7 +1104,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ad830c7be6cc4254ba93a086da63a22a, type: 2}
   _itemsContainer: {fileID: 1105961350}
   _itemPrefab: {fileID: 7429731564049370496, guid: a02d9bfe5ecfe514a81098b987e0a565, type: 3}
-  _notEnoughCoinsTxt: {fileID: 134363300}
+  _buyingText: {fileID: 134363300}
 --- !u!1 &262506287
 GameObject:
   m_ObjectHideFlags: 0

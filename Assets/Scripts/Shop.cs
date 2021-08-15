@@ -15,7 +15,7 @@ public class Shop : MonoBehaviour
     [Header("Buy Shop References")]
     [SerializeField] Transform _itemsContainer;
     [SerializeField] GameObject _itemPrefab;
-    [SerializeField] TextMeshProUGUI _notEnoughCoinsTxt;
+    [SerializeField] TextMeshProUGUI _buyingText;
 
     List<GameObject> _currentItemsList = null;
 
@@ -81,18 +81,19 @@ public class Shop : MonoBehaviour
             {
                 slot.EquipItem(item);
             }
+            StartCoroutine(DisplayBoughtText($"You bought {item.itemName} for: {item.itemPrice}"));
         }
         else
         {
-            StartCoroutine(DisplayNotEnoughCoinsText());
+            StartCoroutine(DisplayBoughtText("Not Enough Coins!"));
         }
     }
 
-    IEnumerator DisplayNotEnoughCoinsText()
+    IEnumerator DisplayBoughtText(string text)
     {
-        _notEnoughCoinsTxt.enabled = true;
-        yield return new WaitForSeconds(1f);
-        _notEnoughCoinsTxt.enabled = false;
+        _buyingText.text = text;
+        yield return new WaitForSeconds(2f);
+        _buyingText.text = "";
     }
 
 
