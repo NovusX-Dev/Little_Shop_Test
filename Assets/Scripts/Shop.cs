@@ -12,19 +12,18 @@ public class Shop : MonoBehaviour
     [Header("List of items in the shop")]
     [SerializeField] ShopItemSO[] shopItem;
     
-    [Header("References")]
+    [Header("Buy Shop References")]
     [SerializeField] Transform _itemsContainer;
     [SerializeField] GameObject _itemPrefab;
 
     List<GameObject> _currentItemsList = null;
 
-    void Start()
+    private void OnEnable()
     {
-        PopulateCategory("HeadWear");
+        PopulateBuyCategory("HeadWear");
     }
 
-
-    public void PopulateCategory(string itemType)
+    public void PopulateBuyCategory(string itemType)
     {
         if (_currentItemsList != null)
         {
@@ -64,14 +63,14 @@ public class Shop : MonoBehaviour
                
 
                 //Add listner to the button
-                itemObejct.GetComponent<Button>().onClick.AddListener(() => OnButtonClick(currentItem));
+                itemObejct.GetComponent<Button>().onClick.AddListener(() => OnBuyClick(currentItem));
             }
         }
 
         _currentItemsList = newtItemsList;
     }
 
-    private void OnButtonClick(ShopItemSO item)
+    private void OnBuyClick(ShopItemSO item)
     {
         if (CoinManager.Instance.GetCoinAmount() >= item.itemPrice)
         {
@@ -87,6 +86,7 @@ public class Shop : MonoBehaviour
             Debug.Log("Not enough coins.");
         }
     }
+
 
     public void CloseShop()
     {

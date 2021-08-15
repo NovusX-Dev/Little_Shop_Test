@@ -13,6 +13,7 @@ public class PlayerBodyEquipment : MonoBehaviour
     private bool _isNaked = true;
 
     SpriteRenderer _spriteRenderer;
+    ShopItemSO _equipedItemSO = null;
 
     private void Awake()
     {
@@ -38,6 +39,25 @@ public class PlayerBodyEquipment : MonoBehaviour
             _spriteRenderer.sprite = itemToBeEquiped.rightSprite;
             _isNaked = false;
         }
+
+        _equipedItemSO = itemToBeEquiped;
+    }
+
+    public void UnEquipItem()
+    {
+        _equipedItemSO = null;
+        _spriteRenderer.sprite = _nakedEquipment;
+        _isNaked = true;
+    }
+
+    public bool IsNaked()
+    {
+        return _isNaked;
+    }
+
+    public ShopItemSO GetCurrentItem()
+    {
+        return _equipedItemSO;
     }
 
 }

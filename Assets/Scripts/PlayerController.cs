@@ -64,6 +64,7 @@ public class PlayerController : MonoBehaviour
             keeper.ActivateButton(true);
             _currentShopKeeper = keeper;
             Shop.OnCloseBuyShop += AllowPlayerMovement;
+            SellShop.OnCloseSellShop += AllowPlayerMovement;
         }
     }
 
@@ -77,6 +78,7 @@ public class PlayerController : MonoBehaviour
             keeper.ButtonPressed(false);
             _currentShopKeeper = null;
             Shop.OnCloseBuyShop -= AllowPlayerMovement;
+            SellShop.OnCloseSellShop -= AllowPlayerMovement;
         }
     }
 

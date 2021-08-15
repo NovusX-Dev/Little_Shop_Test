@@ -38,4 +38,14 @@ public class UIManager : MonoBehaviour
         _dialogePanel.SetActive(activate);
     }
 
+    public void OpenBuyShop()
+    {
+        _buyPanel.SetActive(true);
+    }
+
+    public void OpenSellShop()
+    {
+        _sellPanel.SetActive(true);
+    }
+
 }
