@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 532af2bdd6231e04987981d23c3e57cf, type: 3}
-  m_Name: Sandals
+  m_Name: Cool Blue Vest
   m_EditorClassIdentifier: 
-  itemType: 3
-  itemName: Sandals
-  itemPrice: 75
-  centerSprite: {fileID: 0}
-  leftSprite: {fileID: 21300398, guid: 7f55fd39ae3f7b7449fa3d2c516cc700, type: 3}
-  rightSprite: {fileID: 21300402, guid: 7f55fd39ae3f7b7449fa3d2c516cc700, type: 3}
+  itemType: 2
+  itemName: Cool Blue Vest
+  itemPrice: 100
+  centerSprite: {fileID: 21300358, guid: 7f55fd39ae3f7b7449fa3d2c516cc700, type: 3}
+  leftSprite: {fileID: 0}
+  rightSprite: {fileID: 0}

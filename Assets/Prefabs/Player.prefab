@@ -205,6 +205,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8488615840370113718}
   - component: {fileID: 8588531955926709760}
+  - component: {fileID: 234266858}
   m_Layer: 0
   m_Name: equipment_down_R_foot
   m_TagString: Untagged
@@ -277,6 +278,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &234266858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8484806945851566620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c0d679a1f6b0bc45a7387a71d6edbf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _nakedEquipment: {fileID: 21301002, guid: 7f55fd39ae3f7b7449fa3d2c516cc700, type: 3}
+  _slotType: 3
+  _centerEqiupment: 0
+  _leftEquipment: 0
+  _rightEquipment: 1
 --- !u!1 &8484811816691019652
 GameObject:
   m_ObjectHideFlags: 0
@@ -2002,6 +2020,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8488386686030792740}
   - component: {fileID: 8588822284777231940}
+  - component: {fileID: 1002458071}
   m_Layer: 0
   m_Name: equipment_down_body
   m_TagString: Untagged
@@ -2074,6 +2093,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1002458071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8486395297280269170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c0d679a1f6b0bc45a7387a71d6edbf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _nakedEquipment: {fileID: 21300994, guid: 7f55fd39ae3f7b7449fa3d2c516cc700, type: 3}
+  _slotType: 2
+  _centerEqiupment: 1
+  _leftEquipment: 0
+  _rightEquipment: 0
 --- !u!1 &8486408010486315912
 GameObject:
   m_ObjectHideFlags: 0
@@ -2678,6 +2714,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8488442004744857222}
   - component: {fileID: 8588565337408878388}
+  - component: {fileID: 1206620511}
   m_Layer: 0
   m_Name: equipment_down_L_foot
   m_TagString: Untagged
@@ -2750,6 +2787,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1206620511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8486491484121641338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c0d679a1f6b0bc45a7387a71d6edbf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _nakedEquipment: {fileID: 21300998, guid: 7f55fd39ae3f7b7449fa3d2c516cc700, type: 3}
+  _slotType: 3
+  _centerEqiupment: 0
+  _leftEquipment: 1
+  _rightEquipment: 0
 --- !u!1 &8486505545412902904
 GameObject:
   m_ObjectHideFlags: 0
@@ -3629,6 +3683,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8488277766325362814}
   - component: {fileID: 8588375688068813560}
+  - component: {fileID: 224863096}
   m_Layer: 0
   m_Name: down_headwear
   m_TagString: Untagged
@@ -3701,6 +3756,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &224863096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8486683569106238436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c0d679a1f6b0bc45a7387a71d6edbf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _nakedEquipment: {fileID: 21301108, guid: 7f55fd39ae3f7b7449fa3d2c516cc700, type: 3}
+  _slotType: 0
+  _centerEqiupment: 1
+  _leftEquipment: 0
+  _rightEquipment: 0
 --- !u!1 &8486685198717013710
 GameObject:
   m_ObjectHideFlags: 0
@@ -4568,6 +4640,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8488431834289292936}
   - component: {fileID: 8588412759997023288}
+  - component: {fileID: 1418692485}
   m_Layer: 0
   m_Name: equipment_down_chest
   m_TagString: Untagged
@@ -4640,6 +4713,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1418692485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8486776702647467720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c0d679a1f6b0bc45a7387a71d6edbf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _nakedEquipment: {fileID: 21300970, guid: 7f55fd39ae3f7b7449fa3d2c516cc700, type: 3}
+  _slotType: 1
+  _centerEqiupment: 1
+  _leftEquipment: 0
+  _rightEquipment: 0
 --- !u!1 &8486795572505943038
 GameObject:
   m_ObjectHideFlags: 0
@@ -5842,6 +5932,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8488407330094283654}
   - component: {fileID: 8590429052585522004}
+  - component: {fileID: 55395436}
   m_Layer: 0
   m_Name: equipment_down_belt
   m_TagString: Untagged
@@ -5914,6 +6005,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &55395436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8486944751002290352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c0d679a1f6b0bc45a7387a71d6edbf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _nakedEquipment: {fileID: 21300974, guid: 7f55fd39ae3f7b7449fa3d2c516cc700, type: 3}
+  _slotType: 4
+  _centerEqiupment: 1
+  _leftEquipment: 0
+  _rightEquipment: 0
 --- !u!1 &8486951136758338518
 GameObject:
   m_ObjectHideFlags: 0

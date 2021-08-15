@@ -76,7 +76,11 @@ public class Shop : MonoBehaviour
         if (CoinManager.Instance.GetCoinAmount() >= item.itemPrice)
         {
             CoinManager.Instance.DeductCoins(item.itemPrice);
-            Debug.Log("Item Bought: " + item.itemName);
+            var equipableSlots = FindObjectsOfType<PlayerBodyEquipment>();
+            foreach(var slot in equipableSlots)
+            {
+                slot.EquipItem(item);
+            }
         }
         else
         {
