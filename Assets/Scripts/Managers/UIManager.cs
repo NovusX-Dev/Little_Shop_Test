@@ -48,4 +48,8 @@ public class UIManager : MonoBehaviour
         _sellPanel.SetActive(true);
     }
 
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }

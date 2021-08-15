@@ -15,6 +15,7 @@ public class Shop : MonoBehaviour
     [Header("Buy Shop References")]
     [SerializeField] Transform _itemsContainer;
     [SerializeField] GameObject _itemPrefab;
+    [SerializeField] TextMeshProUGUI _notEnoughCoinsTxt;
 
     List<GameObject> _currentItemsList = null;
 
@@ -83,8 +84,15 @@ public class Shop : MonoBehaviour
         }
         else
         {
-            Debug.Log("Not enough coins.");
+            StartCoroutine(DisplayNotEnoughCoinsText());
         }
+    }
+
+    IEnumerator DisplayNotEnoughCoinsText()
+    {
+        _notEnoughCoinsTxt.enabled = true;
+        yield return new WaitForSeconds(1f);
+        _notEnoughCoinsTxt.enabled = false;
     }
 
 

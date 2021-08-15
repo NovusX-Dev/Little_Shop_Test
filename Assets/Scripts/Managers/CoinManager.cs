@@ -31,19 +31,10 @@ public class CoinManager : MonoBehaviour
 
     void Update()
     {
-        #if UNITY_EDITOR
-
         if(Input.GetKeyDown(KeyCode.K))
         {
             AddCoins(50);
         }
-
-        if(Input.GetKeyDown(KeyCode.L))
-        {
-            DeductCoins(50);
-        }
-
-        #endif
     }
 
     public void AddCoins(int amount)
